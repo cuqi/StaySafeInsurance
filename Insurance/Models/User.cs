@@ -26,6 +26,19 @@ namespace Insurance.Models
 
         [Display(Name = "Датум на раѓање")]
         [DataType(DataType.Date)] // birthdate of user
-        public DateTime? BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
+
+        public int Age
+        { // age of the agent
+            get
+            {
+                TimeSpan span = DateTime.Now - BirthDate;
+                double years = (double)span.TotalDays / 365.2425;
+                return (int)years;
+            }
+        }
+        public List<Policy> Policies { get; set; } // list of policies the user has
+
+        public List<Case> Cases { get; set; } // list of cases the user has
     }
 }

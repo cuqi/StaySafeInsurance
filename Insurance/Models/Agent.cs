@@ -24,20 +24,28 @@ namespace Insurance.Models
         [StringLength(50)] // agent lastname
         public string LastName { get; set; }
 
-        public int Age { get; set; } // age of the agent
+        public int Age
+        { // age of the agent
+            get
+            {
+                TimeSpan span = DateTime.Now - BirthDate;
+                double years = (double)span.TotalDays / 365.2425;
+                return (int)years;
+            }
+        } 
 
         public int PolicyCount { get; set; } // the number of policies the agent has
 
         [Display(Name = "Датум на раѓање")] 
         [DataType(DataType.Date)] // birthdate of agent
-        public DateTime? BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
         [Display(Name = "Датум на вработување")]
         [DataType(DataType.Date)] // hiredate of agent
-        public DateTime? HireDate { get; set; }
+        public DateTime HireDate { get; set; }
 
         public string ProfilePicture { get; set; }
 
-        public ICollection<Policy> Policies { get; set; } // list of policies the agent has
+        public List<Policy> Policies { get; set; } // list of policies the agent has
     }
 }

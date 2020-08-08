@@ -1,0 +1,63 @@
+﻿@model Insurance.ViewModels.GroupPoliciesViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>My Policies</h1>
+
+<form asp-controller="Policies" asp-action="Index" method="get">
+    <p>
+        <select asp-for="PT" asp-items="Model.PolicyType">
+            <option value="">ALL</option>
+        </select>
+        Title: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Policies[0].PolicyNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Policies[0].PolicyType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Policies[0].Owner.EMBG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Policies[0].Agent.AgentNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Policies) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PolicyNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PolicyType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner.EMBG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Agent.AgentNumber)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

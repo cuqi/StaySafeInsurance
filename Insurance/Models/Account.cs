@@ -4,33 +4,27 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace Insurance.Models
 {
-    public class Account
+    public class Account : IdentityUser
     {
-        [Key]
-        public int Id { get; set; }
-
-        [Required]
-        public string Username { get; set; }
-
-        [Required]
-        public string Password { get; set; }
-
-        public string Token { get; set; }
-
+        [Display(Name = "Улога")]
         public string Role { get; set; }
 
         // if the account is agent
         public int? AgentId { get; set; }
         [Display(Name = "Агент")]
+        [ForeignKey("AgentId")]
         public Agent Agent { get; set; }
 
         // if the account is user 
-
         public int? UserId { get; set; }
         [Display(Name = "Осигуреник")]
+        [ForeignKey("UserId")]
         public User User { get; set; }
     }
 }

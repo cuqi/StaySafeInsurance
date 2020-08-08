@@ -22,8 +22,7 @@ namespace Insurance.Models
         [Display(Name = "Датум на незгодата")]
         [DataType(DataType.Date)] // accidentdate for case
         public DateTime? AccidentDate { get; set; }
-
-        public int? InsuredId { get; set; } // foreign key of insured
-        public User Insured { get; set; } // info about the insured user
+        public int UserId { get; set; } // foreign key of policy
+        public User User { get; set; } // info about the policy
     }
 }
